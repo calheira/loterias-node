@@ -1,0 +1,1457 @@
+----------------------------------------------------------------------------
+[36;1mzztool[m
+Miniferramentas para auxiliar as funções.
+Uso: [36;1mzztool[m [-e] ferramenta [argumentos]
+Ex.: [36;1mzztool[m grep_var foo $var
+     [36;1mzztool[m eco Minha mensagem colorida
+     [36;1mzztool[m testa_numero $num
+     [36;1mzztool[m -e testa_numero $num || return
+----------------------------------------------------------------------------
+[36;1mzzajuda[m
+Mostra uma tela de ajuda com explicação e sintaxe de todas as funções.
+Opções: --lista  lista de todas as funções, com sua descrição
+        --uso    resumo de todas as funções, com a sintaxe de uso
+Uso: [36;1mzzajuda[m [--lista|--uso]
+Ex.: [36;1mzzajuda[m
+     [36;1mzzajuda[m --lista
+----------------------------------------------------------------------------
+[36;1mzzzz[m
+Mostra informações sobre as funções, como versão e localidade.
+Opções: --atualiza  baixa a versão mais nova das funções
+        --teste     testa se a codificação e os pré-requisitos estão OK
+        --bashrc    instala as funções no ~/.bashrc
+        --tcshrc    instala as funções no ~/.tcshrc
+        --zshrc     instala as funções no ~/.zshrc
+Uso: [36;1mzzzz[m [--atualiza|--teste|--bashrc|--tcshrc|--zshrc]
+Ex.: [36;1mzzzz[m
+     [36;1mzzzz[m --teste
+----------------------------------------------------------------------------
+[36;1mzzalfabeto[m
+Central de alfabetos (romano, militar, radiotelefônico, OTAN, RAF, etc).
+Obs.: Sem argumentos mostra a tabela completa, senão traduz uma palavra.
+
+Tipos reconhecidos:
+
+   --militar | --radio | --fone | --otan | --icao | --ansi
+                           Alfabeto radiotelefônico internacional
+   --romano | --latino     A B C D E F...
+   --royal-navy            Marinha Real - Reino Unido, 1914-1918
+   --signalese             Primeira Guerra, 1914-1918
+   --raf24                 Força Aérea Real - Reino Unido, 1924-1942
+   --raf42                 Força Aérea Real - Reino Unido, 1942-1943
+   --raf                   Força Aérea Real - Reino Unido, 1943-1956
+   --us                    Alfabeto militar norte-americano, 1941-1956
+   --portugal              Lugares de Portugal
+   --names                 Nomes de pessoas, em inglês
+   --lapd                  Polícia de Los Angeles (EUA)
+   --morse                 Código Morse
+
+Uso: [36;1mzzalfabeto[m [--TIPO] [palavra]
+Ex.: [36;1mzzalfabeto[m --militar
+     [36;1mzzalfabeto[m --militar cambio
+----------------------------------------------------------------------------
+[36;1mzzansi2html[m
+Converte para HTML o texto colorido do terminal (códigos ANSI).
+Útil para mostrar a saída do terminal em sites e blogs, sem perder as cores.
+Obs.: Exemplos de texto ANSI estão na saída das funções [36;1mzzcores[m e [36;1mzzecho[m.
+Obs.: Use o comando script para guardar a saída do terminal em um arquivo.
+Uso: [36;1mzzansi2html[m [arquivo]
+Ex.: [36;1mzzecho[m --letra verde -s -p -N testando | [36;1mzzansi2html[m
+     ls --color /etc | [36;1mzzansi2html[m > ls.html
+     [36;1mzzcores[m | [36;1mzzansi2html[m > cores.html
+----------------------------------------------------------------------------
+[36;1mzzarrumacidade[m
+Arruma o nome da cidade informada: maiúsculas, abreviações, acentos, etc.
+
+Uso: [36;1mzzarrumacidade[m [cidade]
+Ex.: [36;1mzzarrumacidade[m SAO PAULO                     # São Paulo
+     [36;1mzzarrumacidade[m rj                            # Rio de Janeiro
+     [36;1mzzarrumacidade[m Floripa                       # Florianópolis
+     echo Floripa | [36;1mzzarrumacidade[m                # Florianópolis
+     cat cidades.txt | [36;1mzzarrumacidade[m             # [uma cidade por linha]
+----------------------------------------------------------------------------
+[36;1mzzarrumanome[m
+Renomeia arquivos do diretório atual, arrumando nomes estranhos.
+Obs.: Ele deixa tudo em minúsculas, retira acentuação e troca espaços em
+      branco, símbolos e pontuação pelo sublinhado _.
+Opções: -n  apenas mostra o que será feito, não executa
+        -d  também renomeia diretórios
+        -r  funcionamento recursivo (entra nos diretórios)
+Uso: [36;1mzzarrumanome[m [-n] [-d] [-r] arquivo(s)
+Ex.: [36;1mzzarrumanome[m *
+     [36;1mzzarrumanome[m -n -d -r .                   # tire o -n para renomear!
+     [36;1mzzarrumanome[m "DOCUMENTO MALÃO!.DOC"       # fica documento_malao.doc
+     [36;1mzzarrumanome[m "RAMONES - Don't Go.mp3"     # fica ramones-dont_go.mp3
+----------------------------------------------------------------------------
+[36;1mzzascii[m
+Mostra a tabela ASCII com todos os caracteres imprimíveis (32-126,161-255).
+O formato utilizando é: <decimal> <hexa> <octal> <ascii>.
+O número de colunas e a largura da tabela são configuráveis.
+Uso: [36;1mzzascii[m [colunas] [largura]
+Ex.: [36;1mzzascii[m
+     [36;1mzzascii[m 4
+     [36;1mzzascii[m 7 100
+----------------------------------------------------------------------------
+[36;1mzzbeep[m
+Aguarda N minutos e dispara uma sirene usando o 'speaker'.
+Útil para lembrar de eventos próximos no mesmo dia.
+Sem argumentos, restaura o 'beep' para o seu tom e duração originais.
+Obs.: A sirene tem 4 toques, sendo 2 tons no modo texto e apenas 1 no Xterm.
+Uso: [36;1mzzbeep[m [números]
+Ex.: [36;1mzzbeep[m 0
+     [36;1mzzbeep[m 1 5 15    # espere 1 minuto, depois mais 5, e depois 15
+----------------------------------------------------------------------------
+[36;1mzzbicho[m
+Jogo do bicho.
+Com um número como argumento indica o bicho e o grupo.
+Se o for um número entre 1 e 25 seguido de "g", lista os números do grupo.
+Sem argumento ou com apenas "g" lista todos os grupos de bichos.
+
+Uso: [36;1mzzbicho[m [numero] [g]
+Ex.: [36;1mzzbicho[m 123456
+     [36;1mzzbicho[m 14 g
+     [36;1mzzbicho[m g
+----------------------------------------------------------------------------
+[36;1mzzbissexto[m
+Diz se o ano informado é bissexto ou não.
+Obs.: Se o ano não for informado, usa o atual.
+Uso: [36;1mzzbissexto[m [ano]
+Ex.: [36;1mzzbissexto[m
+     [36;1mzzbissexto[m 2000
+----------------------------------------------------------------------------
+[36;1mzzblist[m
+Mostra se o IP informado está em alguma blacklist (SBL, PBL e XBL).
+Uso: [36;1mzzblist[m IP
+Ex.: [36;1mzzblist[m 200.199.198.197
+----------------------------------------------------------------------------
+[36;1mzzbolsas[m
+http://br.finance.yahoo.com
+Pesquisa índices de bolsas e cotações de ações.
+Sem parâmetros mostra a lista de bolsas disponíveis (códigos).
+Com 1 parâmetro:
+ -l: apenas mostra as bolsas disponíveis e seus nomes.
+ commodities: produtos de origem primária nas bolsas.
+ taxas_fixas ou moedas: exibe tabela de comparação de câmbio (pricipais).
+ taxas_cruzadas: exibe a tabela cartesiana do câmbio.
+ nome_moedas ou moedas_nome: lista códigos e nomes das moedas usadas.
+ servicos, economia ou politica: mostra notícias relativas a esse assuntos.
+ noticias: junta as notícias de servicos e economia.
+ volume: lista ações líderes em volume de negócios na Bovespa.
+ alta ou baixa: lista as ações nessa condição na BMFBovespa.
+ "código de bolsa ou ação": mostra sua última cotação.
+
+Com 2 parâmetros:
+ -l e código de bolsa: lista as ações (códigos).
+ --lista e "código de bolsa": lista as ações com nome e última cotação.
+ taxas_fixas ou moedas <principais|europa|asia|latina>: exibe tabela de
+  comparação de câmbio dessas regiões.
+ "código de bolsa" e um texto: pesquisa-o no nome ou código das ações
+   disponíveis na bolsa citada.
+ "código de bolsa ou ação" e data: pesquisa a cotação no dia.
+ noticias e "código de ação": Noticias relativas a essa ação (só Bovespa)
+
+Com 3 parâmetros ou mais:
+ "código de bolsa ou ação" e 2 datas: pesquisa as cotações nos dias com
+   comparações entre datas e variações da ação ou bolsa pesquisada.
+ vs (ou comp) e 2 códigos de bolsas ou ações: faz a comparação entre as duas
+  ações ou bolsas. Se houver um quarto parametro como uma data faz essa
+  comparaçao na data especificada. Mas não compara ações com bolsas.
+
+Uso: [36;1mzzbolsas[m [-l|--lista] [bolsa|ação] [data1|pesquisa] [data2]
+Ex.: [36;1mzzbolsas[m                  # Lista das bolsas (códigos)
+     [36;1mzzbolsas[m -l               # Lista das bolsas (nomes)
+     [36;1mzzbolsas[m -l ^BVSP         # Lista as ações do índice Bovespa (código)
+     [36;1mzzbolsas[m --lista ^BVSP    # Lista as ações do índice Bovespa (nomes)
+     [36;1mzzbolsas[m ^BVSP loja       # Procura ações com "loja" no nome ou código
+     [36;1mzzbolsas[m ^BVSP            # Cotação do índice Bovespa
+     [36;1mzzbolsas[m PETR4.SA         # Cotação das ações da Petrobrás
+     [36;1mzzbolsas[m PETR4.SA 21/12/2010  # Cotação da Petrobrás nesta data
+     [36;1mzzbolsas[m commodities      # Tabela de commodities
+     [36;1mzzbolsas[m altas            # Lista ações em altas na Bovespa
+     [36;1mzzbolsas[m volume           # Lista ações em alta em volume de negócios
+     [36;1mzzbolsas[m taxas_fixas
+     [36;1mzzbolsas[m taxas_cruzadas
+     [36;1mzzbolsas[m noticias         # Noticias recentes do mercado financeiro
+     [36;1mzzbolsas[m vs petr3.sa vale5.sa # Compara ambas cotações
+----------------------------------------------------------------------------
+[36;1mzzbrasileirao[m
+http://esporte.uol.com.br/
+Mostra a tabela atualizada do Campeonato Brasileiro - Série A, B ou C.
+Se for fornecido um numero mostra os jogos da rodada, com resultados.
+Com argumento -l lista os todos os clubes da série A e B.
+Se o argumento -l for seguido do nome do clube, lista todos os jogos já
+ocorridos do clube desde o começo do ano de qualquer campeonato, e os
+próximos jogos no brasileirão.
+
+Nomenclatura:
+	PG  - Pontos Ganhos
+	J   - Jogos
+	V   - Vitórias
+	E   - Empates
+	D   - Derrotas
+	GP  - Gols Pró
+	GC  - Gols Contra
+	SG  - Saldo de Gols
+	(%) - Aproveitamento (pontos)
+
+Uso: [36;1mzzbrasileirao[m [a|b|c] [numero rodada] ou [36;1mzzbrasileirao[m -l [nome clube]
+Ex.: [36;1mzzbrasileirao[m
+     [36;1mzzbrasileirao[m a
+     [36;1mzzbrasileirao[m b
+     [36;1mzzbrasileirao[m c
+     [36;1mzzbrasileirao[m 27
+     [36;1mzzbrasileirao[m b 12
+     [36;1mzzbrasileirao[m -l
+     [36;1mzzbrasileirao[m -l portuguesa
+----------------------------------------------------------------------------
+[36;1mzzbyte[m
+Conversão entre grandezas de bytes (mega, giga, tera, etc).
+Uso: [36;1mzzbyte[m N [unidade-entrada] [unidade-saida]  # BKMGTPEZY
+Ex.: [36;1mzzbyte[m 2048                    # Quanto é 2048 bytes?  -- 2K
+     [36;1mzzbyte[m 2048 K                  # Quanto é 2048KB?      -- 2M
+     [36;1mzzbyte[m 7 K M                   # Quantos megas em 7KB? -- 0.006M
+     [36;1mzzbyte[m 7 G B                   # Quantos bytes em 7GB? -- 7516192768B
+     for u in b k m g t p e z y; do [36;1mzzbyte[m 2 t $u; done
+----------------------------------------------------------------------------
+[36;1mzzcalcula[m
+Calculadora.
+Wrapper para o comando bc, que funciona no formato brasileiro: 1.234,56.
+Obs.: Números fracionados podem vir com vírgulas ou pontos: 1,5 ou 1.5.
+Use a opção --soma para somar uma lista de números vindos da STDIN.
+
+Uso: [36;1mzzcalcula[m operação|--soma
+Ex.: [36;1mzzcalcula[m 2,20 + 3.30          # vírgulas ou pontos, tanto faz
+     [36;1mzzcalcula[m '2^2*(4-1)'          # 2 ao quadrado vezes 4 menos 1
+     echo 2 + 2 | [36;1mzzcalcula[m         # lendo da entrada padrão (STDIN)
+     [36;1mzzseq[m 5 | [36;1mzzcalcula[m --soma     # soma números da STDIN
+----------------------------------------------------------------------------
+[36;1mzzcalculaip[m
+Calcula os endereços de rede e broadcast à partir do IP e máscara da rede.
+Obs.: Se não especificada, será usada a máscara padrão (RFC 1918) ou 24.
+Uso: [36;1mzzcalculaip[m ip [netmask]
+Ex.: [36;1mzzcalculaip[m 127.0.0.1 24
+     [36;1mzzcalculaip[m 10.0.0.0/8
+     [36;1mzzcalculaip[m 192.168.10.0 255.255.255.240
+     [36;1mzzcalculaip[m 10.10.10.0
+----------------------------------------------------------------------------
+[36;1mzzcapitalize[m
+Altera Um Texto Para Deixar Todas As Iniciais De Palavras Em Maiúsculas.
+Use a opção -1 para converter somente a primeira letra de cada linha.
+Use a opção -w para adicionar caracteres de palavra (Padrão: A-Za-z0-9áéí…)
+
+Uso: [36;1mzzcapitalize[m [texto]
+Ex.: [36;1mzzcapitalize[m root                                 # Root
+     [36;1mzzcapitalize[m kung fu panda                        # Kung Fu Panda
+     [36;1mzzcapitalize[m -1 kung fu panda                     # Kung fu panda
+     [36;1mzzcapitalize[m quero-quero                          # Quero-Quero
+     echo eu_uso_camel_case | [36;1mzzcapitalize[m             # Eu_Uso_Camel_Case
+     echo "i don't care" | [36;1mzzcapitalize[m                # I Don'T Care
+     echo "i don't care" | [36;1mzzcapitalize[m -w \'          # I Don't Care
+     cat arquivo.txt | [36;1mzzcapitalize[m
+----------------------------------------------------------------------------
+[36;1mzzcarnaval[m
+Mostra a data da terça-feira de Carnaval para qualquer ano.
+Obs.: Se o ano não for informado, usa o atual.
+Regra: 47 dias antes do domingo de Páscoa.
+Uso: [36;1mzzcarnaval[m [ano]
+Ex.: [36;1mzzcarnaval[m
+     [36;1mzzcarnaval[m 1999
+----------------------------------------------------------------------------
+[36;1mzzcbn[m
+http://cbn.globoradio.com.br
+Busca e toca os últimos comentários dos comentaristas da radio CBN.
+Uso: [36;1mzzcbn[m [--mp3] [-c COMENTARISTA] [-d data]  ou  [36;1mzzcbn[m --lista
+Ex.: [36;1mzzcbn[m -c max -d ontem
+     [36;1mzzcbn[m -c mauro -d tudo
+     [36;1mzzcbn[m -c juca -d 13/05/09
+     [36;1mzzcbn[m -c miriam
+     [36;1mzzcbn[m --mp3 -c max
+----------------------------------------------------------------------------
+[36;1mzzchavepgp[m
+http://pgp.mit.edu
+Busca a identificação da chave PGP, fornecido o nome ou e-mail da pessoa.
+Uso: [36;1mzzchavepgp[m nome|e-mail
+Ex.: [36;1mzzchavepgp[m Carlos Oliveira da Silva
+     [36;1mzzchavepgp[m carlos@dominio.com.br
+----------------------------------------------------------------------------
+[36;1mzzchecamd5[m
+Checa o md5sum de arquivos baixados da net.
+Nota: A função checa o arquivo no diretório corrente (./)
+Uso: [36;1mzzchecamd5[m arquivo md5sum
+Ex.: [36;1mzzchecamd5[m ./ubuntu-8.10.iso f9e0494e91abb2de4929ef6e957f7753
+----------------------------------------------------------------------------
+[36;1mzzcidade[m
+http://pt.wikipedia.org/wiki/Anexo:Lista_de_munic%C3%ADpios_do_Brasil
+Lista completa com todas as 5.500+ cidades do Brasil, com busca.
+Obs.: Sem argumentos, mostra uma cidade aleatória.
+
+Uso: [36;1mzzcidade[m [palavra|regex]
+Ex.: [36;1mzzcidade[m              # mostra uma cidade qualquer
+     [36;1mzzcidade[m campos       # mostra as cidades com "Campos" no nome
+     [36;1mzzcidade[m '(SE)'       # mostra todas as cidades de Sergipe
+     [36;1mzzcidade[m ^X           # mostra as cidades que começam com X
+----------------------------------------------------------------------------
+[36;1mzzcinclude[m
+Acha as funções de uma biblioteca da linguagem C (arquivos .h).
+Obs.: O diretório padrão de procura é o /usr/include.
+Uso: [36;1mzzcinclude[m nome-biblioteca
+Ex.: [36;1mzzcinclude[m stdio
+     [36;1mzzcinclude[m /minha/rota/alternativa/stdio.h
+----------------------------------------------------------------------------
+[36;1mzzcinemark15h[m
+http://cinemark.com.br/programacao/cidade/1
+Exibe os filmes com sessão às 15h (mais barata) no Cinemark da sua cidade.
+Uso: [36;1mzzcinemark15h[m [cidade | codigo_cinema]
+Ex.: [36;1mzzcinemark15h[m sao paulo
+----------------------------------------------------------------------------
+[36;1mzzcineuci[m
+http://www.ucicinemas.com.br
+Exibe a programação dos cinemas UCI de sua cidade.
+Se não for passado nenhum parâmetro, são listadas as cidades e cinemas.
+Obs.: não utilize acentos: digite "Sao Paulo", e não "São Paulo"
+Uso: [36;1mzzcineuci[m [cidade | codigo_cinema]
+Ex.: [36;1mzzcineuci[m recife
+     [36;1mzzcineuci[m 14
+----------------------------------------------------------------------------
+[36;1mzzcnpj[m
+Gera um CNPJ válido aleatório ou valida um CNPJ informado.
+Obs.: O CNPJ informado pode estar formatado (pontos e hífen) ou não.
+Uso: [36;1mzzcnpj[m [cnpj]
+Ex.: [36;1mzzcnpj[m 12.345.678/0001-95      # valida o CNPJ
+     [36;1mzzcnpj[m 12345678000195          # com ou sem formatadores
+     [36;1mzzcnpj[m                         # gera um CNPJ válido
+----------------------------------------------------------------------------
+[36;1mzzcontapalavra[m
+Conta o número de vezes que uma palavra aparece num arquivo.
+Obs.: É diferente do grep -c, que não conta várias palavras na mesma linha.
+Opções: -i  ignora a diferença de maiúsculas/minúsculas
+        -p  busca parcial, conta trechos de palavras
+Uso: [36;1mzzcontapalavra[m [-i|-p] palavra arquivo(s)
+Ex.: [36;1mzzcontapalavra[m root /etc/passwd
+     [36;1mzzcontapalavra[m -i -p a /etc/passwd      # Compare com grep -ci a
+     cat /etc/passwd | [36;1mzzcontapalavra[m root
+----------------------------------------------------------------------------
+[36;1mzzcontapalavras[m
+Conta o número de vezes que cada palavra aparece em um texto.
+
+Opções: -i       Trata maiúsculas e minúsculas como iguais, FOO = Foo = foo
+        -n NÚM   Mostra apenas as NÚM palavras mais frequentes
+
+Uso: [36;1mzzcontapalavras[m [-i] [-n N] [arquivo(s)]
+Ex.: [36;1mzzcontapalavras[m arquivo.txt
+     [36;1mzzcontapalavras[m -i arquivo.txt
+     [36;1mzzcontapalavras[m -i -n 10 /etc/passwd
+     cat arquivo.txt | [36;1mzzcontapalavras[m
+----------------------------------------------------------------------------
+[36;1mzzconverte[m
+Faz várias conversões como: caracteres, temperatura e distância.
+         cf = (C)elsius             para (F)ahrenheit
+         fc = (F)ahrenheit          para (C)elsius
+         ck = (C)elsius             para (K)elvin
+         kc = (K)elvin              para (C)elsius
+         fk = (F)ahrenheit          para (K)elvin
+         kf = (K)elvin              para (F)ahrenheit
+         km = (K)Quilômetros        para (M)ilhas
+         mk = (M)ilhas              para (K)Quilômetros
+         db = (D)ecimal             para (B)inário
+         bd = (B)inário             para (D)ecimal
+         cd = (C)aractere           para (D)ecimal
+         dc = (D)ecimal             para (C)aractere
+         hc = (H)exadecimal         para (C)aractere
+         ch = (C)aractere           para (H)exadecimal
+         dh = (D)ecimal             para (H)exadecimal
+         hd = (H)exadecimal         para (D)ecimal
+Uso: [36;1mzzconverte[m <cf|fc|ck|kc|fk|kf|mk|km|db|bd|cd|dc|hc|ch|dh|hd> número
+Ex.: [36;1mzzconverte[m cf 5
+     [36;1mzzconverte[m dc 65
+     [36;1mzzconverte[m db 32
+----------------------------------------------------------------------------
+[36;1mzzcores[m
+Mostra todas as combinações de cores possíveis no console.
+Também mostra os códigos ANSI para obter tais combinações.
+Uso: [36;1mzzcores[m
+Ex.: [36;1mzzcores[m
+----------------------------------------------------------------------------
+[36;1mzzcorpuschristi[m
+Mostra a data de Corpus Christi para qualquer ano.
+Obs.: Se o ano não for informado, usa o atual.
+Regra: 60 dias depois do domingo de Páscoa.
+Uso: [36;1mzzcorpuschristi[m [ano]
+Ex.: [36;1mzzcorpuschristi[m
+     [36;1mzzcorpuschristi[m 2009
+----------------------------------------------------------------------------
+[36;1mzzcorrida[m
+Mostra a classificação dos pilotos em várias corridas (F1, Indy, GP, ...).
+
+ Use as seguintes combinações para as corridas
+  Fórmula 1: f1 ou formula1
+  Fórmula Indy: indy ou formula_indy
+  GP2: gp2
+  Fórmula Truck: truck ou formula_truck
+  Fórmula Truck Sul-Americana: truck_sul
+  Stock Car: stock ou stock_car
+  Moto GP: moto ou moto_gp
+  Moto 2: moto2
+  Moto 3: moto3
+  Rali: rali
+  Sprint Cup (Nascar): nascar ou nascar1 ou sprint ou sprint_cup
+  Truck Series (Nascar): nascar2 ou truck_series
+
+Uso: [36;1mzzcorrida[m <f1|indy|gp2|truck|truck_sul|stock|rali>
+Uso: [36;1mzzcorrida[m <moto|moto_gp|moto2|moto3>
+Uso: [36;1mzzcorrida[m <nascar|nascar1|sprint|nascar2|truck_series>
+Ex.: [36;1mzzcorrida[m truck
+----------------------------------------------------------------------------
+[36;1mzzcpf[m
+Gera um CPF válido aleatório ou valida um CPF informado.
+Obs.: O CPF informado pode estar formatado (pontos e hífen) ou não.
+Uso: [36;1mzzcpf[m [cpf]
+Ex.: [36;1mzzcpf[m 123.456.789-09          # valida o CPF
+     [36;1mzzcpf[m 12345678909             # com ou sem formatadores
+     [36;1mzzcpf[m                         # gera um CPF válido
+----------------------------------------------------------------------------
+[36;1mzzdata[m
+Calculadora de datas, trata corretamente os anos bissextos.
+Você pode somar ou subtrair dias, meses e anos de uma data qualquer.
+Você pode informar a data dd/mm/aaaa ou usar palavras como: hoje, ontem.
+Na diferença entre duas datas, o resultado é o número de dias entre elas.
+Se informar somente uma data, converte para número de dias (01/01/1970 = 0).
+Se informar somente um número (de dias), converte de volta para a data.
+Esta função também pode ser usada para validar uma data.
+
+Uso: [36;1mzzdata[m [data [+|- data|número<d|m|a>]]
+Ex.: [36;1mzzdata[m                           # que dia é hoje?
+     [36;1mzzdata[m anteontem                 # que dia foi anteontem?
+     [36;1mzzdata[m hoje + 15d                # que dia será daqui 15 dias?
+     [36;1mzzdata[m hoje - 40d                # e 40 dias atrás, foi quando?
+     [36;1mzzdata[m 31/12/2010 + 100d         # 100 dias após a data informada
+     [36;1mzzdata[m 29/02/2001                # data inválida, ano não-bissexto
+     [36;1mzzdata[m 29/02/2000 + 1a           # 28/02/2001 <- respeita bissextos
+     [36;1mzzdata[m 01/03/2000 - 11/11/1999   # quantos dias há entre as duas?
+     [36;1mzzdata[m hoje - 07/10/1977         # quantos dias desde meu nascimento?
+     [36;1mzzdata[m 21/12/2012 - hoje         # quantos dias para o fim do mundo?
+----------------------------------------------------------------------------
+[36;1mzzdatafmt[m
+Muda o formato de uma data, com várias opções de personalização.
+Reconhece datas em vários formatos, como aaaa-mm-dd, dd.mm.aaaa e dd/mm.
+Obs.: Se você não informar o ano, será usado o ano corrente.
+Use a opção --en para usar nomes de meses em inglês.
+Use a opção -f para mudar o formato de saída (o padrão é DD/MM/AAAA):
+
+     Código   Exemplo     Descrição
+     --------------------------------------
+     AAAA     2003        Ano com 4 dígitos
+     AA       03          Ano com 2 dígitos
+     A        3           Ano sem zeros à esquerda (1 ou 2 dígitos)
+     MES      fevereiro   Nome do mês
+     MMM      fev         Nome do mês com três letras
+     MM       02          Mês com 2 dígitos
+     M        2           Mês sem zeros à esquerda
+     DD       01          Dia com 2 dígitos
+     D        1           Dia sem zeros à esquerda
+
+Uso: [36;1mzzdatafmt[m [-f formato] [data]
+Ex.: [36;1mzzdatafmt[m 2011-12-31                 # 31/12/2011
+     [36;1mzzdatafmt[m 31.12.11                   # 31/12/2011
+     [36;1mzzdatafmt[m 31/12                      # 31/12/2011    (ano atual)
+     [36;1mzzdatafmt[m -f MES hoje                # maio          (mês atual)
+     [36;1mzzdatafmt[m -f MES --en hoje           # May           (em inglês)
+     [36;1mzzdatafmt[m -f AAAA 31/12/11           # 2011
+     [36;1mzzdatafmt[m -f MM/DD/AA 31/12/2011     # 12/31/11
+     [36;1mzzdatafmt[m -f D/M/A 01/02/2003        # 1/2/3
+     [36;1mzzdatafmt[m -f "D de MES" 01/05/95     # 1 de maio
+     echo 31/12/2011 | [36;1mzzdatafmt[m -f MM    # 12            (via STDIN)
+----------------------------------------------------------------------------
+[36;1mzzdefinr[m
+http://definr.com
+Busca o significado de um termo, palavra ou expressão no site Definr.
+Uso: [36;1mzzdefinr[m termo
+Ex.: [36;1mzzdefinr[m headphone
+     [36;1mzzdefinr[m in force
+----------------------------------------------------------------------------
+[36;1mzzdiadasemana[m
+Mostra qual o dia da semana de uma data qualquer.
+Com a opção -n mostra o resultado em forma numérica (domingo=1).
+Obs.: Se a data não for informada, usa a data atual.
+Uso: [36;1mzzdiadasemana[m [-n] [data]
+Ex.: [36;1mzzdiadasemana[m
+     [36;1mzzdiadasemana[m 31/12/2010          # sexta-feira
+     [36;1mzzdiadasemana[m -n 31/12/2010       # 6
+----------------------------------------------------------------------------
+[36;1mzzdiasuteis[m
+Calcula o número de dias úteis entre duas datas, inclusive ambas.
+Chamada sem argumentos, mostra os total de dias úteis no mês atual.
+Obs.: Não leva em conta feriados.
+
+Uso: [36;1mzzdiasuteis[m [data-inicial data-final]
+Ex.: [36;1mzzdiasuteis[m                          # Fevereiro de 2013 tem 20 dias …
+     [36;1mzzdiasuteis[m 01/01/2011 31/01/2011    # 21
+----------------------------------------------------------------------------
+[36;1mzzdicasl[m
+http://www.dicas-l.unicamp.br
+Procura por dicas sobre determinado assunto na lista Dicas-L.
+Obs.: As opções do grep podem ser usadas (-i já é padrão).
+Uso: [36;1mzzdicasl[m [opção-grep] palavra(s)
+Ex.: [36;1mzzdicasl[m ssh
+     [36;1mzzdicasl[m -w vi
+     [36;1mzzdicasl[m -vEw 'windows|unix|emacs'
+----------------------------------------------------------------------------
+[36;1mzzdicbabylon[m
+http://www.babylon.com
+Tradução de uma palavra em inglês para vários idiomas.
+Francês, alemão, japonês, italiano, hebreu, espanhol, holandês e português.
+Se nenhum idioma for informado, o padrão é o português.
+Uso: [36;1mzzdicbabylon[m [idioma] palavra   #idioma:dut fre ger heb ita jap ptg spa
+Ex.: [36;1mzzdicbabylon[m hardcore
+     [36;1mzzdicbabylon[m jap tree
+----------------------------------------------------------------------------
+[36;1mzzdicjargon[m
+http://catb.org/jargon/
+Dicionário de jargões de informática, em inglês.
+Uso: [36;1mzzdicjargon[m palavra(s)
+Ex.: [36;1mzzdicjargon[m vi
+     [36;1mzzdicjargon[m all your base are belong to us
+----------------------------------------------------------------------------
+[36;1mzzdicportugues[m
+http://www.dicio.com.br
+Dicionário de português.
+Obs.: Ainda não funciona com palavras acentuadas :( [issue #41]
+Uso: [36;1mzzdicportugues[m palavra
+Ex.: [36;1mzzdicportugues[m bolacha
+----------------------------------------------------------------------------
+[36;1mzzdicportugues2[m
+http://www.dicio.com.br
+Dicionário de português.
+Definição de palavras e conjugação verbal
+Fornecendo uma "palavra" como argumento retorna seu significado e sinônimo.
+Se for seguida do termo "def", retorna suas definições.
+Se for seguida do termo "conj", retorna todas as formas de conjugação.
+Pode-se filtrar pelos modos de conjugação, fornecendo após o "conj" o modo
+desejado:
+ind (indicativo), sub (subjuntivo), imp (imperativo), inf (infinitivo)
+
+Uso: [36;1mzzdicportugues2[m palavra [def|conj [ind|sub|conj|imp|inf]]
+Ex.: [36;1mzzdicportugues2[m bolacha
+     [36;1mzzdicportugues2[m verbo conj sub
+----------------------------------------------------------------------------
+[36;1mzzdiffpalavra[m
+Mostra a diferença entre dois textos, palavra por palavra.
+Útil para conferir revisões ortográficas ou mudanças pequenas em frases.
+Obs.: Se tiver muitas *linhas* diferentes, use o comando diff.
+Uso: [36;1mzzdiffpalavra[m arquivo1 arquivo2
+Ex.: [36;1mzzdiffpalavra[m texto-orig.txt texto-novo.txt
+----------------------------------------------------------------------------
+[36;1mzzdolar[m
+http://economia.terra.com.br
+Busca a cotação do dia do dólar (comercial, turismo e PTAX).
+Uso: [36;1mzzdolar[m
+Ex.: [36;1mzzdolar[m
+----------------------------------------------------------------------------
+[36;1mzzdominiopais[m
+http://www.iana.org/cctld/cctld-whois.htm
+Busca a descrição de um código de país da internet (.br, .ca etc).
+Uso: [36;1mzzdominiopais[m [.]código|texto
+Ex.: [36;1mzzdominiopais[m .br
+     [36;1mzzdominiopais[m br
+     [36;1mzzdominiopais[m republic
+----------------------------------------------------------------------------
+[36;1mzzdos2unix[m
+Converte arquivos texto no formato Windows/DOS (CR+LF) para o Unix (LF).
+Obs.: Também remove a permissão de execução do arquivo, caso presente.
+Uso: [36;1mzzdos2unix[m arquivo(s)
+Ex.: [36;1mzzdos2unix[m frases.txt
+     cat arquivo.txt | [36;1mzzdos2unix[m
+----------------------------------------------------------------------------
+[36;1mzzecho[m
+Mostra textos coloridos, sublinhados e piscantes no terminal (códigos ANSI).
+Opções: -f, --fundo       escolhe a cor de fundo
+        -l, --letra       escolhe a cor da letra
+        -p, --pisca       texto piscante
+        -s, --sublinhado  texto sublinhado
+        -N, --negrito     texto em negrito (brilhante em alguns terminais)
+        -n, --nao-quebra  não quebra a linha no final, igual ao echo -n
+Cores: preto vermelho verde amarelo azul roxo ciano branco
+Obs.: \t, \n e amigos são sempre interpretados (igual ao echo -e).
+Uso: [36;1mzzecho[m [-f cor] [-l cor] [-p] [-s] [-N] [-n] [texto]
+Ex.: [36;1mzzecho[m -l amarelo Texto em amarelo
+     [36;1mzzecho[m -f azul -l branco -N Texto branco em negrito, com fundo azul
+     [36;1mzzecho[m -p -s Texto piscante e sublinhado
+----------------------------------------------------------------------------
+[36;1mzzenglish[m
+http://www.dict.org
+Busca definições em inglês de palavras da língua inglesa em DICT.org.
+Uso: [36;1mzzenglish[m palavra-em-inglês
+Ex.: [36;1mzzenglish[m momentum
+----------------------------------------------------------------------------
+[36;1mzzenviaemail[m
+Envia email via ssmtp.
+Opções:
+  -h, --help     exibe a ajuda.
+  -v, --verbose  exibe informações para debug durante o processamento.
+  -V, --version  exibe a versão.
+  -f, --from     email do remetente.
+  -t, --to       email dos destinatários (separe com vírgulas, sem espaço).
+  -c, --cc       email dos destinatários em cópia (vírgulas, sem espaço).
+  -b, --bcc      emails em cópia oculta (vírgulas, sem espaço).
+  -s, --subject  o assunto do email.
+  -e, --mensagem arquivo que contém a mensagem/corpo do email.
+Uso: [36;1mzzenviaemail[m -f email -t email [-c email] [-b email] -s assunto -m msg
+Ex.: [36;1mzzenviaemail[m -f quem_envia@dominio.com -t quem_recebe@dominio.com \
+     -s "Teste de e-mail" -m "./arq_msg.eml"
+----------------------------------------------------------------------------
+[36;1mzzestado[m
+Lista os estados do Brasil e suas capitais.
+Obs.: Sem argumentos, mostra a lista completa.
+
+Opções: --sigla        Mostra somente as siglas
+        --nome         Mostra somente os nomes
+        --capital      Mostra somente as capitais
+        --slug         Mostra somente os slugs (nome simplificado)
+        --formato FMT  Você escolhe o formato de saída, use os tokens:
+                       {sigla}, {nome}, {capital}, {slug}, \n , \t
+        --python       Formata como listas/dicionários do Python
+        --javascript   Formata como arrays do JavaScript
+        --php          Formata como arrays do PHP
+        --html         Formata usando a tag <SELECT> do HTML
+        --url,--url2   Exemplos simples de uso da opção --formato
+
+Uso: [36;1mzzestado[m [--OPÇÃO]
+Ex.: [36;1mzzestado[m                      # [mostra a lista completa]
+     [36;1mzzestado[m --sigla              # AC AL AP AM BA …
+     [36;1mzzestado[m --html               # <option value="AC">AC - Acre</option> …
+     [36;1mzzestado[m --python             # siglas = ['AC', 'AL', 'AP', …
+     [36;1mzzestado[m --formato '{sigla},'             # AC,AL,AP,AM,BA,…
+     [36;1mzzestado[m --formato '{sigla} - {nome}\n'   # AC - Acre …
+     [36;1mzzestado[m --formato '{capital}-{sigla}\n'  # Rio Branco-AC …
+----------------------------------------------------------------------------
+[36;1mzzextensao[m
+Informa a extensão de um arquivo.
+Obs.: Caso o arquivo não possua extensão, retorna vazio "".
+Uso: [36;1mzzextensao[m arquivo
+Ex.: [36;1mzzextensao[m /tmp/arquivo.txt       # resulta em "txt"
+     [36;1mzzextensao[m /tmp/arquivo           # resulta em ""
+----------------------------------------------------------------------------
+[36;1mzzfeed[m
+Leitor de Feeds RSS e Atom.
+Se informar a URL de um feed, são mostradas suas últimas notícias.
+Se informar a URL de um site, mostra a URL do(s) Feed(s).
+Obs.: Use a opção -n para limitar o número de resultados (Padrão é 10).
+
+Uso: [36;1mzzfeed[m [-n número] URL...
+Ex.: [36;1mzzfeed[m http://aurelio.net/feed/
+     [36;1mzzfeed[m -n 5 aurelio.net/feed/          # O http:// é opcional
+     [36;1mzzfeed[m aurelio.net funcoeszz.net       # Mostra URL dos feeds
+----------------------------------------------------------------------------
+[36;1mzzferiado[m
+Verifica se a data passada por parâmetro é um feriado ou não.
+Caso não seja passado nenhuma data é pego a data atual.
+Pode-se configurar a variável ZZFERIADO para os feriados regionais.
+O formato é o dd/mm:descrição, por exemplo: 20/11:Consciência negra.
+Uso: [36;1mzzferiado[m -l [ano] | [data]
+Ex.: [36;1mzzferiado[m 25/12/2008
+     [36;1mzzferiado[m -l
+     [36;1mzzferiado[m -l 2010
+----------------------------------------------------------------------------
+[36;1mzzfoneletra[m
+Conversão de telefones contendo letras para apenas números.
+Uso: [36;1mzzfoneletra[m telefone
+Ex.: [36;1mzzfoneletra[m 2345-LINUX              # Retorna 2345-54689
+     echo 5555-HELP | [36;1mzzfoneletra[m        # Retorna 5555-4357
+----------------------------------------------------------------------------
+[36;1mzzfrenteverso2pdf[m
+Combina 2 arquivos, frentes.pdf e versos.pdf, em um único frenteverso.pdf.
+Opções:
+  -rf, --frentesreversas  informa ordem reversa no arquivo frentes.pdf.
+  -rv, --versosreversos   informa ordem reversa no arquivo versos.pdf.
+   -d, --diretorio        informa o diretório de entrada/saída. Padrao=".".
+   -v, --verbose          exibe informações de debug durante a execução.
+Uso: [36;1mzzfrenteverso2pdf[m [-rf] [-rv] [-d diretorio]
+Ex.: [36;1mzzfrenteverso2pdf[m
+     [36;1mzzfrenteverso2pdf[m -rf
+     [36;1mzzfrenteverso2pdf[m -rv -d "/tmp/dir_teste"
+----------------------------------------------------------------------------
+[36;1mzzfreshmeat[m
+http://freshmeat.net
+Procura por programas na base do site Freshmeat.
+Uso: [36;1mzzfreshmeat[m programa
+Ex.: [36;1mzzfreshmeat[m tetris
+----------------------------------------------------------------------------
+[36;1mzzglobo[m
+Mostra a programação Rede Globo do dia.
+Uso: [36;1mzzglobo[m
+Ex.: [36;1mzzglobo[m
+----------------------------------------------------------------------------
+[36;1mzzgoogle[m
+http://google.com
+Pesquisa no Google diretamente pela linha de comando.
+Uso: [36;1mzzgoogle[m [-n <número>] palavra(s)
+Ex.: [36;1mzzgoogle[m receita de bolo de abacaxi
+     [36;1mzzgoogle[m -n 5 ramones papel higiênico cachorro
+----------------------------------------------------------------------------
+[36;1mzzgravatar[m
+http://www.gravatar.com
+Monta a URL completa para o Gravatar do email informado.
+
+Opções: -t, --tamanho N      Tamanho do avatar (padrão 80, máx 512)
+        -d, --default TIPO   Tipo do avatar substituto, se não encontrado
+
+Se não houver um avatar para o email, a opção --default informa que tipo
+de avatar substituto será usado em seu lugar:
+    mm          Mistery Man, a silhueta de uma pessoa (não muda)
+    identicon   Padrão geométrico, muda conforme o email
+    monsterid   Monstros, muda cores e rostos
+    wavatar     Rostos, muda características e cores
+    retro       Rostos pixelados, tipo videogame antigo 8-bits
+Veja exemplos em http://gravatar.com/site/implement/images/
+
+Uso: [36;1mzzgravatar[m [--tamanho N] [--default tipo] email
+Ex.: [36;1mzzgravatar[m fulano@dominio.com.br
+     [36;1mzzgravatar[m -t 128 -d mm fulano@dominio.com.br
+     [36;1mzzgravatar[m --tamanho 256 --default retro fulano@dominio.com.br
+----------------------------------------------------------------------------
+[36;1mzzhexa2str[m
+Converte os bytes em hexadecimal para a string equivalente.
+Uso: [36;1mzzhexa2str[m [bytes]
+Ex.: [36;1mzzhexa2str[m 40 4d 65 6e 74 65 42 69 6e 61 72 69 61   # sem prefixo
+     [36;1mzzhexa2str[m 0x42 0x69 0x6E                           # com prefixo 0x
+     echo 0x42 0x69 0x6E | [36;1mzzhexa2str[m
+----------------------------------------------------------------------------
+[36;1mzzhora[m
+Faz cálculos com horários.
+A opção -r torna o cálculo relativo à primeira data, por exemplo:
+  02:00 - 03:30 = -01:30 (sem -r) e 22:30 (com -r)
+
+Uso: [36;1mzzhora[m [-r] hh:mm [+|- hh:mm] ...
+Ex.: [36;1mzzhora[m 8:30 + 17:25        # preciso somar dois horários
+     [36;1mzzhora[m 12:00 - agora       # quando falta para o almoço?
+     [36;1mzzhora[m -12:00 + -5:00      # horas negativas!
+     [36;1mzzhora[m 1000                # quanto é 1000 minutos?
+     [36;1mzzhora[m -r 5:30 - 8:00      # que horas ir dormir para acordar às 5:30?
+     [36;1mzzhora[m -r agora + 57:00    # e daqui 57 horas, será quando?
+     [36;1mzzhora[m 1:00 + 2:00 + 3:00 - 4:00 - 0:30   # cálculos múltiplos
+----------------------------------------------------------------------------
+[36;1mzzhoracerta[m
+http://www.worldtimeserver.com
+Mostra a hora certa de um determinado local.
+Se nenhum parâmetro for passado, são listados as localidades disponíveis.
+O parâmetro pode ser tanto a sigla quando o nome da localidade.
+A opção -s realiza a busca somente na sigla.
+Uso: [36;1mzzhoracerta[m [-s] local
+Ex.: [36;1mzzhoracerta[m rio grande do sul
+     [36;1mzzhoracerta[m -s br
+     [36;1mzzhoracerta[m rio
+     [36;1mzzhoracerta[m us-ny
+----------------------------------------------------------------------------
+[36;1mzzhoramin[m
+Converte horas em minutos.
+Obs.: Se não informada a hora, usa o horário atual para o cálculo.
+Uso: [36;1mzzhoramin[m [hh:mm]
+Ex.: [36;1mzzhoramin[m
+     [36;1mzzhoramin[m 10:53       # Retorna 653
+     [36;1mzzhoramin[m -10:53      # Retorna -653
+----------------------------------------------------------------------------
+[36;1mzzhorariodeverao[m
+Mostra as datas de início e fim do horário de verão.
+Obs.: Ano de 2008 em diante. Se o ano não for informado, usa o atual.
+Regra: 3º domingo de outubro/fevereiro, exceto carnaval (4º domingo).
+Uso: [36;1mzzhorariodeverao[m [ano]
+Ex.: [36;1mzzhorariodeverao[m
+     [36;1mzzhorariodeverao[m 2009
+----------------------------------------------------------------------------
+[36;1mzzhowto[m
+http://www.ibiblio.org
+Procura documentos do tipo HOWTO.
+Uso: [36;1mzzhowto[m [--atualiza] palavra
+Ex.: [36;1mzzhowto[m apache
+     [36;1mzzhowto[m --atualiza
+----------------------------------------------------------------------------
+[36;1mzzipinternet[m
+http://www.getip.com
+Mostra o seu número IP (externo) na Internet.
+Uso: [36;1mzzipinternet[m
+Ex.: [36;1mzzipinternet[m
+----------------------------------------------------------------------------
+[36;1mzzjquery[m
+Exibe a descrição da função JQuery informada.
+Caso não seja passado o nome, serão exibidas informações acerca do $().
+Se usado o argumento -s, será exibida somente a sintaxe.
+Uso: [36;1mzzjquery[m [-s] funcao
+Ex.: [36;1mzzjquery[m gt
+     [36;1mzzjquery[m -s gt
+----------------------------------------------------------------------------
+[36;1mzzjuntalinhas[m
+Junta várias linhas em uma só, podendo escolher o início, fim e separador.
+
+Melhorias em relação ao comando paste -s:
+- Trata corretamente arquivos no formato Windows (CR+LF)
+- Lê arquivos ISO-8859-1 sem erros no Mac (o paste dá o mesmo erro do tr)
+- O separador pode ser uma string, não está limitado a um caractere
+- Opções -i e -f para delimitar somente um trecho a ser juntado
+
+Opções: -d sep        Separador a ser colocado entre as linhas (padrão: Tab)
+        -i, --inicio  Início do trecho a ser juntado (número ou regex)
+        -f, --fim     Fim do trecho a ser juntado (número ou regex)
+
+Uso: [36;1mzzjuntalinhas[m [-d separador] [-i texto] [-f texto] arquivo(s)
+Ex.: [36;1mzzjuntalinhas[m arquivo.txt
+     [36;1mzzjuntalinhas[m -d @@@ arquivo.txt             # junta toda as linhas
+     [36;1mzzjuntalinhas[m -d : -i 10 -f 20 arquivo.txt   # junta linhas 10 a 20
+     [36;1mzzjuntalinhas[m -d : -i 10 arquivo.txt         # junta linha 10 em diante
+     cat /etc/named.conf | [36;1mzzjuntalinhas[m -d '' -i '^[a-z]' -f '^}'
+----------------------------------------------------------------------------
+[36;1mzzkill[m
+Mata processos pelo nome do seu comando de origem.
+Com a opção -n, apenas mostra o que será feito, mas não executa.
+Se nenhum argumento for informado, mostra a lista de processos ativos.
+Uso: [36;1mzzkill[m [-n] [comando [comando2 ...]]
+Ex.: [36;1mzzkill[m
+     [36;1mzzkill[m netscape
+     [36;1mzzkill[m netsc soffice startx
+----------------------------------------------------------------------------
+[36;1mzzlembrete[m
+Sistema simples de lembretes: cria, apaga e mostra.
+Uso: [36;1mzzlembrete[m [texto]|[número [d]]
+Ex.: [36;1mzzlembrete[m                      # Mostra todos
+     [36;1mzzlembrete[m 5                    # Mostra o 5º lembrete
+     [36;1mzzlembrete[m 5d                   # Deleta o 5º lembrete
+     [36;1mzzlembrete[m Almoço com a sogra   # Adiciona lembrete
+----------------------------------------------------------------------------
+[36;1mzzlimpalixo[m
+Retira linhas em branco e comentários.
+Para ver rapidamente quais opções estão ativas num arquivo de configuração.
+Além do tradicional #, reconhece comentários de arquivos .vim.
+Obs.: Aceita dados vindos da entrada padrão (STDIN).
+Uso: [36;1mzzlimpalixo[m [arquivos]
+Ex.: [36;1mzzlimpalixo[m ~/.vimrc
+     cat /etc/inittab | [36;1mzzlimpalixo[m
+----------------------------------------------------------------------------
+[36;1mzzlinha[m
+Mostra uma linha de um texto, aleatória ou informada pelo número.
+Obs.: Se passado um argumento, restringe o sorteio às linhas com o padrão.
+Uso: [36;1mzzlinha[m [número | -t texto] [arquivo(s)]
+Ex.: [36;1mzzlinha[m /etc/passwd           # mostra uma linha qualquer, aleatória
+     [36;1mzzlinha[m 9 /etc/passwd         # mostra a linha 9 do arquivo
+     [36;1mzzlinha[m -2 /etc/passwd        # mostra a penúltima linha do arquivo
+     [36;1mzzlinha[m -t root /etc/passwd   # mostra uma das linhas com "root"
+     cat /etc/passwd | [36;1mzzlinha[m     # o arquivo pode vir da entrada padrão
+----------------------------------------------------------------------------
+[36;1mzzlinux[m
+http://www.kernel.org/kdist/finger_banner
+Mostra as versões disponíveis do Kernel Linux.
+Uso: [36;1mzzlinux[m
+Ex.: [36;1mzzlinux[m
+----------------------------------------------------------------------------
+[36;1mzzlinuxnews[m
+http://... - vários
+Busca as últimas notícias sobre linux em sites em inglês.
+Obs.: Cada site tem uma letra identificadora que pode ser passada como
+      parâmetro, para informar quais sites você quer pesquisar:
+
+         F)reshMeat         Linux T)oday
+         S)lashDot          Linux W)eekly News
+         O)S News
+
+Uso: [36;1mzzlinuxnews[m [sites]
+Ex.: [36;1mzzlinuxnews[m
+     [36;1mzzlinuxnews[m fs
+----------------------------------------------------------------------------
+[36;1mzzlocale[m
+http://funcoeszz.net/locales.txt
+Busca o código do idioma (locale) - por exemplo, português é pt_BR.
+Com a opção -c, pesquisa somente nos códigos e não em sua descrição.
+Uso: [36;1mzzlocale[m [-c] código|texto
+Ex.: [36;1mzzlocale[m chinese
+     [36;1mzzlocale[m -c pt
+----------------------------------------------------------------------------
+[36;1mzzloteria[m
+http://www1.caixa.gov.br/loterias
+Consulta os resultados da quina, megasena, duplasena, lotomania e lotofácil.
+Obs.: Se nenhum argumento for passado, todas as loterias são mostradas.
+Uso: [36;1mzzloteria[m [quina | megasena | duplasena | lotomania | lotofacil]
+Ex.: [36;1mzzloteria[m
+     [36;1mzzloteria[m quina megasena
+----------------------------------------------------------------------------
+[36;1mzzloteria2[m
+Resultados da quina, megasena, duplasena, lotomania, lotofácil, federal e timemania.
+Se o 2º argumento for um número, pesquisa o resultado filtrando o concurso.
+Se nenhum argumento for passado, todas as loterias são mostradas.
+
+Uso: [36;1mzzloteria2[m [[quina|megasena|duplasena|lotomania|lotofacil|federal|timemania|loteca] concurso]
+Ex.: [36;1mzzloteria2[m
+     [36;1mzzloteria2[m quina megasena
+----------------------------------------------------------------------------
+[36;1mzzmaiores[m
+Acha os maiores arquivos/diretórios do diretório atual (ou outros).
+Opções: -r  busca recursiva nos subdiretórios
+        -f  busca somente os arquivos e não diretórios
+        -n  número de resultados (o padrão é 10)
+Uso: [36;1mzzmaiores[m [-r] [-f] [-n <número>] [dir1 dir2 ...]
+Ex.: [36;1mzzmaiores[m
+     [36;1mzzmaiores[m /etc /tmp
+     [36;1mzzmaiores[m -r -n 5 ~
+----------------------------------------------------------------------------
+[36;1mzzmaiusculas[m
+Converte todas as letras para MAIÚSCULAS, inclusive acentuadas.
+Uso: [36;1mzzmaiusculas[m [texto]
+Ex.: [36;1mzzmaiusculas[m eu quero gritar                # via argumentos
+     echo eu quero gritar | [36;1mzzmaiusculas[m         # via STDIN
+----------------------------------------------------------------------------
+[36;1mzzmat[m
+Uma coletânea de funções matemáticas simples.
+Se o primeiro argumento for um '-p' seguido de número sem espaço
+define a precisão dos resultados ( casas decimais ), o padrão é 6
+Em cada função foi colocado um pequeno help um pouco mais detalhado,
+pois ficou muito extenso colocar no help do [36;1mzzmat[m apenas.
+
+Funções matemáticas disponíveis.
+mmc mdc somatoria produtoria media soma fat arranjo arranjo_r combinacao
+combinacao_r pa pa2 pg area volume eq2g d2p egr err egc egc3p ege vetor
+converte sen cos tan csc sec cot asen acos atan log ln abs
+raiz potencia pow elevado aleatorio random det conf_eq sem_zeros
+fibonacci (fib) lucas tribonacci (trib) newton binomio_newton
+Mais detalhes: [36;1mzzmat[m função
+
+Uso: [36;1mzzmat[m [-pnumero] funcoes [número] [número]
+Ex.: [36;1mzzmat[m mmc 8 12
+     [36;1mzzmat[m media 5[2] 7 4[3]
+     [36;1mzzmat[m somatoria 3 9 2x+3
+     [36;1mzzmat[m -p3 sen 60g
+----------------------------------------------------------------------------
+[36;1mzzmd5[m
+Calcula o código MD5 dos arquivos informados, ou de um texto via STDIN.
+Obs.: Wrapper portável para os comandos md5 (Mac) e md5sum (Linux).
+
+Uso: [36;1mzzmd5[m [arquivo(s)]
+Ex.: [36;1mzzmd5[m arquivo.txt
+     cat arquivo.txt | [36;1mzzmd5[m
+----------------------------------------------------------------------------
+[36;1mzzminiurl[m
+http://migre.me
+Encurta uma URL utilizando o site migre.me.
+Obs.: Se a URL não tiver protocolo no início, será colocado http://
+Uso: [36;1mzzminiurl[m URL
+Ex.: [36;1mzzminiurl[m http://www.funcoeszz.net
+     [36;1mzzminiurl[m www.funcoeszz.net         # O http:// no início é opcional
+----------------------------------------------------------------------------
+[36;1mzzminusculas[m
+Converte todas as letras para minúsculas, inclusive acentuadas.
+Uso: [36;1mzzminusculas[m [texto]
+Ex.: [36;1mzzminusculas[m NÃO ESTOU GRITANDO             # via argumentos
+     echo NÃO ESTOU GRITANDOO | [36;1mzzminusculas[m     # via STDIN
+----------------------------------------------------------------------------
+[36;1mzzmoeda[m
+http://br.invertia.com
+Busca a cotação de várias moedas (mais de 100!) em relação ao dólar.
+Com a opção -t, mostra TODAS as moedas, sem ela, apenas as principais.
+É possível passar várias palavras de pesquisa para filtrar o resultado.
+Obs.: Hora GMT, Dólares por unidade monetária para o Euro e a Libra.
+Uso: [36;1mzzmoeda[m [-t] [pesquisa]
+Ex.: [36;1mzzmoeda[m
+     [36;1mzzmoeda[m -t
+     [36;1mzzmoeda[m euro libra
+     [36;1mzzmoeda[m -t peso
+----------------------------------------------------------------------------
+[36;1mzzmoneylog[m
+Consulta lançamentos do Moneylog, com pesquisa avançada e saldo total.
+Obs.: Chamado sem argumentos, pesquisa o mês corrente
+Obs.: Não expande lançamentos recorrentes e parcelados.
+
+Uso: [36;1mzzmoneylog[m [-d data] [-v valor] [-t tag] [--total] [texto]
+Ex.: [36;1mzzmoneylog[m                       # Todos os lançamentos deste mês
+     [36;1mzzmoneylog[m mercado               # Procure por mercado
+     [36;1mzzmoneylog[m -t mercado            # Lançamentos com a tag mercado
+     [36;1mzzmoneylog[m -t mercado -d 2011    # Tag mercado em 2011
+     [36;1mzzmoneylog[m -t mercado --total    # Saldo total da tag mercado
+     [36;1mzzmoneylog[m -d 31/01/2011         # Todos os lançamentos desta data
+     [36;1mzzmoneylog[m -d 2011               # Todos os lançamentos de 2011
+     [36;1mzzmoneylog[m -d ontem              # Todos os lançamentos de ontem
+     [36;1mzzmoneylog[m -d mes                # Todos os lançamentos deste mês
+     [36;1mzzmoneylog[m -d mes --total        # Saldo total deste mês
+     [36;1mzzmoneylog[m -d 2011-0[123]        # Regex: que casa Jan/Fev/Mar de 2011
+     [36;1mzzmoneylog[m -v /                  # Todos os pagamentos parcelados
+----------------------------------------------------------------------------
+[36;1mzzmudaprefixo[m
+Move os arquivos que tem um prefixo comum para um novo prefixo.
+Opções:
+  -a, --antigo informa o prefixo antigo a ser trocado.
+  -n, --novo   informa o prefixo novo a ser trocado.
+Uso: [36;1mzzmudaprefixo[m -a antigo -n novo
+Ex.: [36;1mzzmudaprefixo[m -a "antigo_prefixo" -n "novo_prefixo"
+     [36;1mzzmudaprefixo[m -a "/tmp/antigo_prefixo" -n "/tmp/novo_prefixo"
+----------------------------------------------------------------------------
+[36;1mzznarrativa[m
+http://translate.google.com
+Narra frases em português usando o Google Tradutor.
+
+Uso: [36;1mzznarrativa[m palavras
+Ex.: [36;1mzznarrativa[m regex é legal
+----------------------------------------------------------------------------
+[36;1mzznatal[m
+http://www.ibb.org.br/vidanet
+A mensagem "Feliz Natal" em vários idiomas.
+Uso: [36;1mzznatal[m [palavra]
+Ex.: [36;1mzznatal[m                   # busca um idioma aleatório
+     [36;1mzznatal[m russo             # Feliz Natal em russo
+----------------------------------------------------------------------------
+[36;1mzznome[m
+http://www.significado.origem.nom.br/
+Dicionário de nomes, com sua origem, numerologia e arcanos do tarot.
+Pode-se filtrar por significado, origem, letra (primeira letra), tarot
+marca (no mundo), numerologia ou tudo - como segundo argumento (opcional).
+Por padrão lista origem e significado.
+
+Uso: [36;1mzznome[m nome [significado|origem|letra|marca|numerologia|tarot|tudo]
+Ex.: [36;1mzznome[m maria
+     [36;1mzznome[m josé origem
+----------------------------------------------------------------------------
+[36;1mzznomefoto[m
+Renomeia arquivos do diretório atual, arrumando a seqüência numérica.
+Obs.: Útil para passar em arquivos de fotos baixadas de uma câmera.
+Opções: -n  apenas mostra o que será feito, não executa
+        -i  define a contagem inicial
+        -d  número de dígitos para o número
+        -p  prefixo padrão para os arquivos
+Uso: [36;1mzznomefoto[m [-n] [-i N] [-d N] [-p TXT] arquivo(s)
+Ex.: [36;1mzznomefoto[m -n *                        # tire o -n para renomear!
+     [36;1mzznomefoto[m -n -p churrasco- *.JPG      # tire o -n para renomear!
+     [36;1mzznomefoto[m -n -d 4 -i 500 *.JPG        # tire o -n para renomear!
+----------------------------------------------------------------------------
+[36;1mzznoticiaslinux[m
+http://... - vários
+Busca as últimas notícias sobre Linux em sites nacionais.
+Obs.: Cada site tem uma letra identificadora que pode ser passada como
+      parâmetro, para informar quais sites você quer pesquisar:
+
+        Y)ahoo Linux         B)r Linux
+        V)iva o Linux        U)nder linux
+        N)otícias linux
+
+Uso: [36;1mzznoticiaslinux[m [sites]
+Ex.: [36;1mzznoticiaslinux[m
+     [36;1mzznoticiaslinux[m yn
+----------------------------------------------------------------------------
+[36;1mzznoticiassec[m
+http://... - vários
+Busca as últimas notícias em sites especializados em segurança.
+Obs.: Cada site tem uma letra identificadora que pode ser passada como
+      parâmetro, para informar quais sites você quer pesquisar:
+
+      Linux Security B)rasil    Linux T)oday - Security
+      Linux S)ecurity           Security F)ocus
+      C)ERT/CC
+
+Uso: [36;1mzznoticiassec[m [sites]
+Ex.: [36;1mzznoticiassec[m
+     [36;1mzznoticiassec[m bcf
+----------------------------------------------------------------------------
+[36;1mzzora[m
+http://ora-code.com
+Retorna a descrição do erro Oracle (ORA-NNNNN).
+Uso: [36;1mzzora[m numero_erro
+Ex.: [36;1mzzora[m 1234
+----------------------------------------------------------------------------
+[36;1mzzpalpite[m
+Palpites de jogos para várias loterias: quina, megasena, lotomania, etc.
+Aqui está a lista completa de todas as loterias suportadas:
+quina, megasena, duplasena, lotomania, lotofácil, timemania, federal, loteca
+
+Uso: [36;1mzzpalpite[m [quina|megasena|duplasena|lotomania|lotofacil|federal|timemania|loteca]
+Ex.: [36;1mzzpalpite[m
+     [36;1mzzpalpite[m megasena
+     [36;1mzzpalpite[m megasena federal lotofacil
+----------------------------------------------------------------------------
+[36;1mzzpascoa[m
+Mostra a data do domingo de Páscoa para qualquer ano.
+Obs.: Se o ano não for informado, usa o atual.
+Regra: Primeiro domingo após a primeira lua cheia a partir de 21 de março.
+Uso: [36;1mzzpascoa[m [ano]
+Ex.: [36;1mzzpascoa[m
+     [36;1mzzpascoa[m 1999
+----------------------------------------------------------------------------
+[36;1mzzpiada[m
+http://www.xalexandre.com.br/
+Mostra uma piada diferente cada vez que é chamada.
+Uso: [36;1mzzpiada[m
+Ex.: [36;1mzzpiada[m
+----------------------------------------------------------------------------
+[36;1mzzporcento[m
+Calcula porcentagens.
+Se informado um número, mostra sua tabela de porcentagens.
+Se informados dois números, mostra a porcentagem relativa entre eles.
+Se informados um número e uma porcentagem, mostra o valor da porcentagem.
+Se informados um número e uma porcentagem com sinal, calcula o novo valor.
+
+Uso: [36;1mzzporcento[m valor [valor|[+|-]porcentagem%]
+Ex.: [36;1mzzporcento[m 500           # Tabela de porcentagens de 500
+     [36;1mzzporcento[m 500.0000      # Tabela para número fracionário (.)
+     [36;1mzzporcento[m 500,0000      # Tabela para número fracionário (,)
+     [36;1mzzporcento[m 5.000,00      # Tabela para valor monetário
+     [36;1mzzporcento[m 500 25        # Mostra a porcentagem de 25 para 500 (5%)
+     [36;1mzzporcento[m 500 1000      # Mostra a porcentagem de 1000 para 500 (200%)
+     [36;1mzzporcento[m 500,00 2,5%   # Mostra quanto é 2,5% de 500,00
+     [36;1mzzporcento[m 500,00 +2,5%  # Mostra quanto é 500,00 + 2,5%
+----------------------------------------------------------------------------
+[36;1mzzpronuncia[m
+http://www.m-w.com
+Fala a pronúncia correta de uma palavra em inglês.
+Uso: [36;1mzzpronuncia[m palavra
+Ex.: [36;1mzzpronuncia[m apple
+----------------------------------------------------------------------------
+[36;1mzzramones[m
+http://aurelio.net/doc/ramones.txt
+Mostra uma frase aleatória, das letras de músicas da banda punk Ramones.
+Obs.: Informe uma palavra se quiser frases sobre algum assunto especifico.
+Uso: [36;1mzzramones[m [palavra]
+Ex.: [36;1mzzramones[m punk
+     [36;1mzzramones[m
+----------------------------------------------------------------------------
+[36;1mzzrandbackground[m
+Muda aleatoriamente o background do GNOME.
+A opção -l faz o script entrar em loop.
+ATENÇÃO: o caminho deve conter a última / para que funcione:
+  /wallpaper/ <- funciona
+  /wallpaper  <- não funciona
+
+Uso: [36;1mzzrandbackground[m -l <caminho_wallpapers> <segundo>
+Ex.: [36;1mzzrandbackground[m /media/wallpaper/
+     [36;1mzzrandbackground[m -l /media/wallpaper/ 5
+----------------------------------------------------------------------------
+[36;1mzzrastreamento[m
+http://www.correios.com.br
+Acompanha encomendas via rastreamento dos Correios.
+Uso: [36;1mzzrastreamento[m <código_da_encomenda> ...
+Ex.: [36;1mzzrastreamento[m RK995267899BR
+     [36;1mzzrastreamento[m RK995267899BR RA995267899CN
+----------------------------------------------------------------------------
+[36;1mzzrelansi[m
+Coloca um relógio digital (hh:mm:ss) no canto superior direito do terminal.
+Uso: [36;1mzzrelansi[m [-s|--stop]
+Ex.: [36;1mzzrelansi[m
+----------------------------------------------------------------------------
+[36;1mzzromanos[m
+Conversor de números romanos para indo-arábicos e vice-versa.
+Uso: [36;1mzzromanos[m número
+Ex.: [36;1mzzromanos[m 1987                # Retorna: MCMLXXXVII
+     [36;1mzzromanos[m XLIII               # Retorna: 43
+----------------------------------------------------------------------------
+[36;1mzzrot13[m
+Codifica/decodifica um texto utilizando a cifra ROT13.
+Uso: [36;1mzzrot13[m texto
+Ex.: [36;1mzzrot13[m texto secreto               # Retorna: grkgb frpergb
+     [36;1mzzrot13[m grkgb frpergb               # Retorna: texto secreto
+     echo texto secreto | [36;1mzzrot13[m        # Retorna: grkgb frpergb
+----------------------------------------------------------------------------
+[36;1mzzrot47[m
+Codifica/decodifica um texto utilizando a cifra ROT47.
+Uso: [36;1mzzrot47[m texto
+Ex.: [36;1mzzrot47[m texto secreto               # Retorna: E6IE@ D64C6E@
+     [36;1mzzrot47[m E6IE@ D64C6E@               # Retorna: texto secreto
+     echo texto secreto | [36;1mzzrot47[m        # Retorna: E6IE@ D64C6E@
+----------------------------------------------------------------------------
+[36;1mzzrpmfind[m
+http://rpmfind.net/linux
+Procura por pacotes RPM em várias distribuições de Linux.
+Obs.: A arquitetura padrão de procura é a i386.
+Uso: [36;1mzzrpmfind[m pacote [distro] [arquitetura]
+Ex.: [36;1mzzrpmfind[m sed
+     [36;1mzzrpmfind[m lilo mandr i586
+----------------------------------------------------------------------------
+[36;1mzzsecurity[m
+http://... - vários
+Mostra os últimos 5 avisos de segurança de sistemas de Linux/UNIX.
+Suportados: Debian FreeBSD Gentoo Mandriva Slackware Suse Ubuntu.
+Uso: [36;1mzzsecurity[m [distros]
+Ex.: [36;1mzzsecutiry[m
+     [36;1mzzsecurity[m mandriva
+     [36;1mzzsecurity[m debian gentoo
+----------------------------------------------------------------------------
+[36;1mzzsemacento[m
+Tira os acentos de todas as letras (áéíóú vira aeiou).
+Uso: [36;1mzzsemacento[m texto
+Ex.: [36;1mzzsemacento[m AÇÃO 1ª bênção           # Retorna: ACAO 1a bencao
+     echo AÇÃO 1ª bênção | [36;1mzzsemacento[m    # Retorna: ACAO 1a bencao
+----------------------------------------------------------------------------
+[36;1mzzsenha[m
+Gera uma senha aleatória de N caracteres únicos (não repetidos).
+Obs.: Sem opções, a senha é gerada usando letras e números.
+
+Opções: -p, --pro   Usa letras, números e símbolos para compor a senha
+        -n, --num   Usa somente números para compor a senha
+
+Uso: [36;1mzzsenha[m [--pro|--num] [n]     (padrão n=8)
+Ex.: [36;1mzzsenha[m
+     [36;1mzzsenha[m 10
+     [36;1mzzsenha[m --num 9
+     [36;1mzzsenha[m --pro 30
+----------------------------------------------------------------------------
+[36;1mzzseq[m
+Mostra uma seqüência numérica, um número por linha, ou outro formato.
+É uma emulação do comando seq, presente no Linux.
+Opções:
+  -f    Formato de saída (printf) para cada número, o padrão é '%d\n'
+Uso: [36;1mzzseq[m [-f formato] [número-inicial [passo]] número-final
+Ex.: [36;1mzzseq[m 10                   # de 1 até 10
+     [36;1mzzseq[m 5 10                 # de 5 até 10
+     [36;1mzzseq[m 10 5                 # de 10 até 5 (regressivo)
+     [36;1mzzseq[m 0 2 10               # de 0 até 10, indo de 2 em 2
+     [36;1mzzseq[m 10 -2 0              # de 10 até 0, indo de 2 em 2
+     [36;1mzzseq[m -f '%d:' 5           # 1:2:3:4:5:
+     [36;1mzzseq[m -f '%0.4d:' 5        # 0001:0002:0003:0004:0005:
+     [36;1mzzseq[m -f '(%d)' 5          # (1)(2)(3)(4)(5)
+     [36;1mzzseq[m -f 'Z' 5             # ZZZZZ
+----------------------------------------------------------------------------
+[36;1mzzsextapaixao[m
+Mostra a data da sexta-feira da paixão para qualquer ano.
+Obs.: Se o ano não for informado, usa o atual.
+Regra: 2 dias antes do domingo de Páscoa.
+Uso: [36;1mzzsextapaixao[m [ano]
+Ex.: [36;1mzzsextapaixao[m
+     [36;1mzzsextapaixao[m 2008
+----------------------------------------------------------------------------
+[36;1mzzshuffle[m
+Desordena as linhas de um texto (ordem aleatória).
+Uso: [36;1mzzshuffle[m [arquivo(s)]
+Ex.: [36;1mzzshuffle[m /etc/passwd         # desordena o arquivo de usuários
+     cat /etc/passwd | [36;1mzzshuffle[m   # o arquivo pode vir da entrada padrão
+----------------------------------------------------------------------------
+[36;1mzzsigla[m
+http://www.acronymfinder.com
+Dicionário de siglas, sobre qualquer assunto (como DVD, IMHO, WYSIWYG).
+Obs.: Há um limite diário de consultas por IP, pode parar temporariamente.
+Uso: [36;1mzzsigla[m sigla
+Ex.: [36;1mzzsigla[m RTFM
+----------------------------------------------------------------------------
+[36;1mzzss[m
+Protetor de tela (Screen Saver) para console, com cores e temas.
+Temas: mosaico, espaco, olho, aviao, jacare, alien, rosa, peixe, siri.
+Obs.: Aperte Ctrl+C para sair.
+Uso: [36;1mzzss[m [--rapido|--fundo] [--tema <tema>] [texto]
+Ex.: [36;1mzzss[m
+     [36;1mzzss[m fui ao banheiro
+     [36;1mzzss[m --rapido /
+     [36;1mzzss[m --fundo --tema peixe
+----------------------------------------------------------------------------
+[36;1mzzstr2hexa[m
+Converte string em bytes em hexadecimal equivalente.
+Uso: [36;1mzzstr2hexa[m [string]
+Ex.: [36;1mzzstr2hexa[m @MenteBrilhante    # 40 4d 65 6e 74 65 42 72 69 6c 68 61 6e…
+     [36;1mzzstr2hexa[m bin                # 62 69 6e
+     echo bin | [36;1mzzstr2hexa[m         # 62 69 6e
+----------------------------------------------------------------------------
+[36;1mzzsubway[m
+Mostra uma sugestão de sanduíche para pedir na lanchonete Subway.
+Obs.: Se não gostar da sugestão, chame a função novamente para ter outra.
+Uso: [36;1mzzsubway[m
+Ex.: [36;1mzzsubway[m
+----------------------------------------------------------------------------
+[36;1mzztabuada[m
+Imprime a tabuada de um número de 1 a 10.
+Se não for informado nenhum argumento será impressa a tabuada de 1 a 9.
+O argumento pode ser entre 0 a 99.
+
+Uso: [36;1mzztabuada[m [número]
+Ex.: [36;1mzztabuada[m
+     [36;1mzztabuada[m 2
+----------------------------------------------------------------------------
+[36;1mzztac[m
+Inverte a ordem das linhas, mostrando da última até a primeira.
+É uma emulação (portável) do comando tac, presente no Linux.
+
+Uso: [36;1mzztac[m [arquivos]
+Ex.: [36;1mzztac[m /etc/passwd
+     [36;1mzztac[m arquivo.txt outro.txt
+     cat /etc/passwd | [36;1mzztac[m
+----------------------------------------------------------------------------
+[36;1mzztempo[m
+http://weather.noaa.gov/
+Mostra as condições do tempo (clima) em um determinado local.
+Se nenhum parâmetro for passado, são listados os países disponíveis.
+Se só o país for especificado, são listadas as suas localidades.
+As siglas também podem ser usadas, por exemplo SBPA = Porto Alegre.
+Uso: [36;1mzztempo[m <país> <localidade>
+Ex.: [36;1mzztempo[m 'United Kingdom' 'London City Airport'
+     [36;1mzztempo[m brazil 'Curitiba Aeroporto'
+     [36;1mzztempo[m brazil SBPA
+----------------------------------------------------------------------------
+[36;1mzztradutor[m
+http://translate.google.com
+Google Tradutor, para traduzir frases para vários idiomas.
+Caso não especificado o idioma, a tradução será português -> inglês.
+Use a opção -l ou --lista para ver todos os idiomas disponíveis.
+Use a opção -a ou --audio para ouvir a frase na voz feminina do google.
+
+Alguns idiomas populares são:
+     pt = português         fr = francês
+     en = inglês            it = italiano
+     es = espanhol          de = alemão
+
+Uso: [36;1mzztradutor[m [de-para] palavras
+Ex.: [36;1mzztradutor[m o livro está na mesa    # the book is on the table
+     [36;1mzztradutor[m pt-en livro             # book
+     [36;1mzztradutor[m pt-es livro             # libro
+     [36;1mzztradutor[m pt-de livro             # Buch
+     [36;1mzztradutor[m de-pt Buch              # livro
+     [36;1mzztradutor[m de-es Buch              # Libro
+     [36;1mzztradutor[m --lista                 # Lista todos os idiomas
+     [36;1mzztradutor[m --lista eslo            # Procura por "eslo" nos idiomas
+     [36;1mzztradutor[m --audio                 # Gera um arquivo OUT.WAV
+----------------------------------------------------------------------------
+[36;1mzztrocaarquivos[m
+Troca o conteúdo de dois arquivos, mantendo suas permissões originais.
+Uso: [36;1mzztrocaarquivos[m arquivo1 arquivo2
+Ex.: [36;1mzztrocaarquivos[m /etc/fstab.bak /etc/fstab
+----------------------------------------------------------------------------
+[36;1mzztrocaextensao[m
+Troca a extensão dos arquivos especificados.
+Com a opção -n, apenas mostra o que será feito, mas não executa.
+Uso: [36;1mzztrocaextensao[m [-n] antiga nova arquivo(s)
+Ex.: [36;1mzztrocaextensao[m -n .doc .txt *          # tire o -n para renomear!
+----------------------------------------------------------------------------
+[36;1mzztrocapalavra[m
+Troca uma palavra por outra, nos arquivos especificados.
+Obs.: Além de palavras, é possível usar expressões regulares.
+Uso: [36;1mzztrocapalavra[m antiga nova arquivo(s)
+Ex.: [36;1mzztrocapalavra[m excessão exceção *.txt
+----------------------------------------------------------------------------
+[36;1mzztv[m
+Mostra a programação da TV, diária ou semanal, com escolha de emissora.
+
+Canais:
+adulto                 espn_brasil        megapix       sony_spin
+ae                     espn_mais          megapix_hd    space
+ae_hd                  esporte_interativo mgm           space_hd
+amazon                 eurochannel        mix_tv        sport_tv
+animal                 film_arts          mtv           sport_tv2
+arte1                  for_man            multishow     sport_tv3
+axn                    fox                nat_geo       studio_universal
+axn_hd                 fox_hd             nat_geo_hd    super_rede
+baby                   fox_life           nbr           syfy
+band                   fox_news           nhk           tbs
+band_espotes           fox_sports         nickelodeon   tcm
+band_news              futura             nick_hd       telecine
+bbc                    fx                 nick_jr       telecine_action
+bbc_hd                 gazeta             off           telecine_action_hd
+biography              glitz              playboy       telecine_cult
+bis_hd                 globo              playboy_tv    telecine_fun
+bloomberg              globo_bahia        ppv1          telecine_hd
+boomerang              globo_campinas     ppv2          telecine_pipoca
+canal_21               globo_df           ppv3          telecine_pipoca_hd
+canal_boi              globo_eptv         ppv4          telecine_premium
+canal_brasil           globo_goias        ppv5          tele_sur
+cancao_nova            globo_minas        ppv6          terra_viva
+cartoon                globo_news         premiere_fc   tnt
+casa_clube             globo_poa          private_gold  tnt_hd
+cinemax                globo_rj           rai           tooncast
+climatempo             globo_sp           ra_tim_bum    travel
+cnn                    gloob              record        trutv
+cnn_espanhol           gnt                record_news   trutv_hd
+cnt                    golf               redetv        tv5_monde
+combate                hbo                rede_familia  tv_brasil
+comedy                 hbo2               rede_genesis  tv_brasil_central
+concert                hbo_family         rede_vida     tv_camara
+corinthians            hbo_hd             rit           tv_escola
+cultura                hbo_plus           rtp           tv_espanha
+discovery              hbo_plus_e         rural         tv_justica
+discovery_civilization hbo_signature      rush_hd       tv_uniao
+discovery_hd           history            santa_cecilia universal
+discovery_kids         history_hd         sbt           venus
+discovery_science      home_health        senac         vh1
+discovery_turbo        htv                senado        vh1_hd
+disney                 investigacao       sesc          vh1_mega
+disney_hd              isat               sexy_hot      viva
+disney_jr              lbv                sexy_prive    warner
+disney_xd              max                shoptime      warner_hd
+dwtv                   max_hd             sic           woohoo
+entertainment          max_prime          sony
+espn                   max_prime_e        sony_hd
+
+Programação corrente:
+doc, esportes, filmes, infantil, series, variedades, todos, agora (padrão).
+
+Se o segundo argumento for "semana" ou "s" mostra toda programação semanal.
+Opção só é válida para os canais.
+Se o primeiro argumento é cod seguido de um número, obtido pelas listagens
+citadas anteriormente, com segundo argumento, mostra um resumo do programa.
+
+Uso: [36;1mzztv[m <emissora> [semana|s]  ou  [36;1mzztv[m cod <numero>
+Ex.: [36;1mzztv[m cultura
+     [36;1mzztv[m cod 3235238
+----------------------------------------------------------------------------
+[36;1mzztweets[m
+Busca as mensagens mais recentes de um usuário do Twitter.
+Use a opção -n para informar o número de mensagens (padrão é 5, máx 20).
+
+Uso: [36;1mzztweets[m [-n N] username
+Ex.: [36;1mzztweets[m oreio
+     [36;1mzztweets[m -n 10 oreio
+----------------------------------------------------------------------------
+[36;1mzzunescape[m
+Restaura caracteres codificados como entidades HTML e XML (&lt; &#62; ...).
+Entende entidades (&gt;), códigos decimais (&#62;) e hexadecimais (&#x3E;).
+
+Opções: --html  Restaura caracteres HTML
+        --xml   Restaura caracteres XML
+
+Uso: [36;1mzzunescape[m [--html] [--xml] [arquivo(s)]
+Ex.: [36;1mzzunescape[m --xml arquivo.xml
+     [36;1mzzunescape[m --html arquivo.html
+     cat arquivo.html | [36;1mzzunescape[m --html
+----------------------------------------------------------------------------
+[36;1mzzunicode2ascii[m
+Converte caracteres Unicode (UTF-8) para seus similares ASCII (128).
+
+Uso: [36;1mzzunicode2ascii[m [arquivo(s)]
+Ex.: [36;1mzzunicode2ascii[m arquivo.txt
+     cat arquivo.txt | [36;1mzzunicode2ascii[m
+----------------------------------------------------------------------------
+[36;1mzzuniq[m
+Retira as linhas repetidas, consecutivas ou não.
+Obs.: Não altera a ordem original das linhas, diferente do sort|uniq.
+
+Uso: [36;1mzzuniq[m [arquivo(s)]
+Ex.: [36;1mzzuniq[m /etc/inittab
+     cat /etc/inittab | [36;1mzzuniq[m
+----------------------------------------------------------------------------
+[36;1mzzunix2dos[m
+Converte arquivos texto no formato Unix (LF) para o Windows/DOS (CR+LF).
+Uso: [36;1mzzunix2dos[m arquivo(s)
+Ex.: [36;1mzzunix2dos[m frases.txt
+     cat arquivo.txt | [36;1mzzunix2dos[m
+----------------------------------------------------------------------------
+[36;1mzzvira[m
+Vira um texto, de trás pra frente (rev) ou de ponta-cabeça.
+Ideia original de: http://www.revfad.com/flip.html (valeu @andersonrizada)
+
+Uso: [36;1mzzvira[m [-X] texto
+Ex.: [36;1mzzvira[m Inverte tudo             # odut etrevnI
+     [36;1mzzvira[m -X De pernas pro ar      # ɹɐ oɹd sɐuɹǝd ǝp
+----------------------------------------------------------------------------
+[36;1mzzwikipedia[m
+http://www.wikipedia.org
+Procura na Wikipédia, a enciclopédia livre.
+Obs.: Se nenhum idioma for especificado, é utilizado o português.
+
+Idiomas: de (alemão)    eo (esperanto)  es (espanhol)  fr (francês)
+         it (italiano)  ja (japonês)    la (latin)     pt (português)
+
+Uso: [36;1mzzwikipedia[m [-idioma] palavra(s)
+Ex.: [36;1mzzwikipedia[m sed
+     [36;1mzzwikipedia[m Linus Torvalds
+     [36;1mzzwikipedia[m -pt Linus Torvalds
+----------------------------------------------------------------------------
+[36;1mzzxml[m
+Parser simples (e limitado) para arquivos XML/HTML.
+Obs.: Este parser é usado pelas Funções ZZ, não serve como parser genérico.
+Obs.: Necessário pois não há ferramenta portável para lidar com XML no Unix.
+
+Opções: --tidy      Reorganiza o código, deixando uma tag por linha
+        --tag       Extrai (grep) uma tag específica
+        --untag     Remove todas as tags, deixando apenas texto
+        --unescape  Converte as entidades &foo; para caracteres normais
+
+Uso: [36;1mzzxml[m [--tidy] [--tag NOME] [--untag] [--unescape] [arquivo(s)]
+Ex.: [36;1mzzxml[m --tidy arquivo.xml
+     [36;1mzzxml[m --untag --unescape arquivo.xml                     # xml -> txt
+     [36;1mzzxml[m --tag title --untag --unescape arquivo.xml         # títulos
+     cat arquivo.xml | [36;1mzzxml[m --tag item | [36;1mzzxml[m --tag title   # aninhado
+-----------------------------------------------------------------------------

@@ -1,6 +1,6 @@
 //Print out message
-function printMessage(topic, username, badgeCount, points) {
-  var message = username + " has " + badgeCount + " total badge(s) and " + points + " points in " + topic;
+function printMessage(data) {
+  var message = data;
   console.log(message);
 }
 
